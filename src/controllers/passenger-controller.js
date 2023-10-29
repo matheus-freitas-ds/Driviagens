@@ -1,12 +1,12 @@
 import httpStatus from "http-status"
-import { passengerService } from "../services/passenger-service"
+import { passengerService } from "../services/passenger-service.js"
 
-export async function savePassenger(req, res) {
+async function savePassenger(req, res) {
     const { firstName, lastName } = req.body
 
-    await passengerService.create(firstName, lastName)
+    const passengerInfo = await passengerService.create(firstName, lastName)
 
-    res.sendStatus(httpStatus.CREATED)
+    res.status(httpStatus.CREATED).send(passengerInfo)
 }
 
 export const passengerController = { savePassenger }
