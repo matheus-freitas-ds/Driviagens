@@ -21,4 +21,17 @@ async function create(origin, destination, date) {
     return flightRepository.create(origin, destination, date)
 }
 
-export const flightService = { create }
+async function find(origin, destination) {
+    const flights = await flightRepository.find(origin, destination)
+
+    const formattedflights = flights.map(row => ({
+        id: row.flight_id,
+        origin: row.origin_city,
+        destination: row.destination_city,
+        date: dayjs(row.flight_date, 'DD-MM-YYYY').format("DD-MM-YYYY")
+    }))
+
+    return formattedflights
+}
+
+export const flightService = { create, find }

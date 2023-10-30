@@ -9,4 +9,13 @@ async function saveFlight(req, res) {
     res.status(httpStatus.CREATED).send(flightInfo)
 }
 
-export const flightController = { saveFlight }
+async function getFlights(req, res) {
+    const origin = req.query.origin || null
+    const destination = req.query.destination || null
+
+    const allFlights = await flightService.find(origin, destination)
+    
+    res.send(allFlights)
+}
+
+export const flightController = { saveFlight, getFlights }
