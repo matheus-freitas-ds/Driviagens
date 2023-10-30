@@ -6,4 +6,10 @@ async function create(firstName, lastName) {
     return result.rows[0]
 }
 
-export const passengerRepository = { create }
+async function findById(id) {
+    const result = await db.query(`SELECT * FROM passengers WHERE id = $1;`, [id])
+
+    return result.rows[0]
+}
+
+export const passengerRepository = { create, findById }

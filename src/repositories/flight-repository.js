@@ -6,4 +6,10 @@ async function create(origin, destination, date) {
     return result.rows[0]
 }
 
-export const flightRepository = { create }
+async function findById(id) {
+    const result = await db.query(`SELECT * FROM flights WHERE id = $1;`, [id])
+
+    return result.rows[0]
+}
+
+export const flightRepository = { create, findById }
