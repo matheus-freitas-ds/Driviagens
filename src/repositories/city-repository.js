@@ -12,4 +12,10 @@ async function create(name) {
     return result.rows[0]
 }
 
-export const cityRepository = { create, find }
+async function findById(id) {
+    const result = await db.query(`SELECT * FROM cities WHERE id = $1;`, [id])
+
+    return result.rows[0]
+}
+
+export const cityRepository = { create, find, findById }
