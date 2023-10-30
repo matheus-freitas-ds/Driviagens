@@ -9,4 +9,12 @@ async function savePassenger(req, res) {
     res.status(httpStatus.CREATED).send(passengerInfo)
 }
 
-export const passengerController = { savePassenger }
+async function findTravels(req, res) {
+    const { name } = req.query
+
+    const travels = await passengerService.findTravels(name)
+    
+    res.send(travels)
+}
+
+export const passengerController = { savePassenger, findTravels }

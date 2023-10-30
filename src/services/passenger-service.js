@@ -4,4 +4,10 @@ async function create(firstName, lastName) {
     return passengerRepository.create(firstName, lastName)
 }
 
-export const passengerService = { create }
+async function findTravels(name) {
+    const travels = await passengerRepository.findTravels(name)
+ 
+    return travels
+}
+
+export const passengerService = { create, findTravels }
